@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/login_bg">
+
+    <ImageView
+        android:id="@+id/main_applogo"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:scrollbarSize="10dp"
+        android:src="@drawable/logo_transparent"
+        android:fitsSystemWindows="true"/>
+
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/main_applogo"
+        android:gravity="center"
+        android:text="CineStar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorPrimary"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:fitsSystemWindows="true"/>
+
+    <Button
+        android:id="@+id/main_join_now_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/input_design"
+        android:padding="20dp"
+        android:text="Đăng ký tài khoản"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:fitsSystemWindows="true"/>
+
+    <Button
+        android:id="@+id/main_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/main_join_now_btn"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/buttons"
+        android:padding="20dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:text="Đăng nhập"
+        android:textColor="@android:color/white"
+        android:fitsSystemWindows="true" />
+
+
+
+
+
+
+</RelativeLayout>

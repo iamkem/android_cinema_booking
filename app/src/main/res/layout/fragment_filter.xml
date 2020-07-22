@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/admin_background">
+
+    <TextView
+        android:id="@+id/select_cinema_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rạp:"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:textSize="22sp"
+        android:textColor="@android:color/holo_red_light" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/select_cinema"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/input_design_admin" />
+
+    <TextView
+        android:id="@+id/select_category_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thể loại:"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:textSize="22sp"
+        android:layout_below="@+id/select_cinema"
+        android:textColor="@android:color/holo_red_light" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/select_category"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/select_cinema"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/input_design_admin"
+        android:entries="@array/categories_arrays"/>
+
+    <TextView
+        android:id="@+id/price_range_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Giá tối đa :"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+
+        android:textSize="22sp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_below="@+id/select_category"/>
+
+
+       <EditText
+           android:id="@+id/range_maxim"
+           android:layout_width="200dp"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/price_range_text"
+           android:layout_marginEnd="15dp"
+           android:background="@drawable/input_design_admin"
+           android:hint="Giá tối đa..."
+           android:layout_marginStart="10dp"
+           android:inputType="number"
+           android:padding="20dp"
+           android:textSize="15sp"
+           android:fitsSystemWindows="true"
+           />
+
+
+
+
+
+    <Button
+        android:id="@+id/apply_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="45dp"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/range_maxim"
+        android:hint="Xác nhận"
+        android:padding="17dp"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+</RelativeLayout>

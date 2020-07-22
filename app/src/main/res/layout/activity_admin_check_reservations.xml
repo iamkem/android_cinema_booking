@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/admin_background"
+    android:padding="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/admin_ll"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/favourite_text"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Đơn đặt vé"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="30sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/admin_ll2"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/admin_ll"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/view_showing_without_booking"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="30dp"
+                android:text="Suất chiếu không có người đặt"
+                android:textSize="10sp"/>
+
+            <Button
+                android:id="@+id/view_user_button"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="30dp"
+                android:text="Xem khách hàng"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/check_booking_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/admin_ll2"
+            app:layout_anchorGravity="bottom"
+            android:layout_gravity="bottom">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

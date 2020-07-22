@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Vayo</string>
+
+
+    <string-array name="categories_arrays">
+        <item>Chọn thể loại...</item>
+        <item>Hành động</item>
+        <item>Phiêu lưu</item>
+        <item>Hoạt hình</item>
+        <item>Tiểu sử</item>
+        <item>Hài hước</item>
+        <item>Tội phạm</item>
+        <item>Kịch</item>
+        <item>Gia đình</item>
+        <item>Kỳ ảo</item>
+        <item>Lịch sử</item>
+        <item>Kinh dị</item>
+        <item>Nhạc kịch</item>
+        <item>Kỳ bí</item>
+        <item>Lãng mạn</item>
+        <item>Khoa học viễn tưởng</item>
+        <item>Thể thao</item>
+        <item>Cảm động</item>
+        <item>Chiến tranh</item>
+        <item>Miền Tây</item>
+    </string-array>
+
+
+</resources>
+
+

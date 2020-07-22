@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/admin_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/edit_cinema_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/input_design_admin" />
+
+    <EditText
+        android:id="@+id/admin_edit_cinema_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_below="@+id/edit_cinema_spinner"
+        android:background="@drawable/input_design_admin"
+        android:hint="Tên rạp..."
+        android:inputType="text"
+        android:padding="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:fitsSystemWindows="true"
+        />
+
+
+    <EditText
+        android:id="@+id/admin_edit_cinema_manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/admin_edit_cinema_name"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/input_design_admin"
+        android:hint="Tên nhân viên quản lý..."
+        android:inputType="text"
+        android:padding="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:fitsSystemWindows="true"
+        />
+
+    <EditText
+        android:id="@+id/admin_edit_cinema_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/admin_edit_cinema_manager"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/input_design_admin"
+        android:hint="Địa chỉ..."
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:fitsSystemWindows="true"
+        />
+
+    <EditText
+        android:id="@+id/admin_edit_cinema_capacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/admin_edit_cinema_address"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/input_design_admin"
+        android:hint="Sức chứa..."
+        android:inputType="number"
+        android:padding="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:fitsSystemWindows="true"
+        />
+
+
+    <Button
+        android:id="@+id/edit_cinema_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/admin_edit_cinema_capacity"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="45dp"
+        android:background="@color/colorPrimary"
+        android:hint="Lưu thay đổi"
+        android:padding="17dp"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

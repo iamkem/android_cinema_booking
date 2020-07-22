@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookShowingActivity"
+    android:background="@drawable/admin_background">
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chi tiết đặt vé phim của bạn"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/movie_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên phim: "
+        android:textSize="22dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@+id/t1" />
+
+    <TextView
+        android:id="@+id/cinema_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="Tên rạp: "
+        android:layout_below="@+id/movie_name"/>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/cinema_name"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Ngày chiếu:"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/cinema_name"
+            android:textSize="22dp"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/booking_for_date_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/input_design_admin" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ll">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Số ghế:"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/cinema_name"
+            android:textSize="22dp"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/seat_count_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/input_design_admin" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/book_showing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="450dp"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="45dp"
+        android:background="@color/colorPrimary"
+        android:hint="Đặt vé"
+        android:padding="17dp"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        />
+
+
+
+</RelativeLayout>
