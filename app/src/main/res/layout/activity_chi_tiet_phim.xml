@@ -27,7 +27,7 @@
                 <ImageView
                     android:id="@+id/movie_details_image"
                     android:layout_width="140dp"
-                    android:layout_height="140dp"
+                    android:layout_height="160dp"
                     android:background="#2d2d2d"
                     android:scaleType="centerCrop" />
 
