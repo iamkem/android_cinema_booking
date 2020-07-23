@@ -8,14 +8,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import com.example.vayo.Database.DatabaseHelper;
-import com.example.vayo.Model.BookingUser;
 import com.example.vayo.Model.Showings;
 import com.example.vayo.Recycler.RecyclerViewShowing;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewShowingActivityActivity extends AppCompatActivity {
+public class DangChieuActivity extends AppCompatActivity {
 
     List<Showings> lstShowing ;
     private DatabaseHelper myDb;
@@ -23,18 +22,18 @@ public class ViewShowingActivityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_showing_activity);
+        setContentView(R.layout.activity_dang_chieu);
 
         myDb = new DatabaseHelper(this);
 
-        //conectare recycler view
+
         RecyclerView myrv =  findViewById(R.id.view_showing_rv);
 
 
-        //actualizare informatii cu useri
+        //Cập nhật dữ liệu
         UpdateScreen();
 
-        //punere lista cu useri ce au comenzi in recycler view
+
         RecyclerViewShowing myAdapter = new RecyclerViewShowing(this,lstShowing);
         myrv.setLayoutManager(new GridLayoutManager(this,1));
         myrv.setAdapter(myAdapter);
@@ -43,15 +42,15 @@ public class ViewShowingActivityActivity extends AppCompatActivity {
 
     private void UpdateScreen()
     {
-        //primire informatii cu toti userii ce au comenzi
+        //Trả về thông tin với tất cả user có đơn hàng
         Cursor res = myDb.getAllShowwithoutBookings();
-        //initializez lista
+        //Khởi tạo danh sách
         lstShowing = new ArrayList<>();
 
 
         for(int i=0;i<res.getCount();i++)
         {
-            //adaugare informatii in lista
+            //Thêm thông tin vào danh sách
             res.moveToPosition(i);
             String id = String.valueOf(res.getString(0));
             String movie_id = get_movie_name(String.valueOf(res.getString(1)));
@@ -66,13 +65,13 @@ public class ViewShowingActivityActivity extends AppCompatActivity {
     String get_movie_name(String id)
     {
         String name= "";
-        //Accesare tabel cu toate filmele
+
         Cursor res = myDb.getAllMovies();
 
 
         for(int i=0;i<res.getCount();i++)
         {
-            //verific daca numele introdus corespunde cu alt nume de film din baza de date
+            //Kiểm tra xem tên đã nhập có tương ứng với tên phim khác trong cơ sở dữ liệu không
             res.moveToPosition(i);
             if(id.equals(String.valueOf(res.getString(0))))
             {
@@ -85,7 +84,7 @@ public class ViewShowingActivityActivity extends AppCompatActivity {
         return name;
     }
 
-    //primire id cinema in functie de numele cinema-ului
+
     String get_cinema_name(String id)
     {
         String name= "";

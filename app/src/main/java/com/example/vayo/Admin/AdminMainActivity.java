@@ -18,7 +18,7 @@ public class AdminMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_main);
 
 
-        //stabilire legatura intre cod si interfata vizuala
+
         CardView movieManager = findViewById(R.id.admin_movie_manager);
         CardView cinemaManager = findViewById(R.id.admin_cinema_manager);
         CardView showingsMovieManager = findViewById(R.id.admin_showing_movie_manager);
@@ -26,7 +26,7 @@ public class AdminMainActivity extends AppCompatActivity {
         CardView logoutCard = findViewById(R.id.admin_logout);
 
 
-        //setez buton actionare pentru fiecare cardView pentru a ajunge in urmatoarea fereastra dorita
+
 
         logoutCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +42,7 @@ public class AdminMainActivity extends AppCompatActivity {
         checkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminMainActivity.this, AdminCheckReservationsActivity.class);
+                Intent intent = new Intent(AdminMainActivity.this, AdminKiemTraDonHangActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

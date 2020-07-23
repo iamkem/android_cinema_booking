@@ -19,7 +19,7 @@ import com.example.vayo.R;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class AdminDeleteCinemasActivity extends AppCompatActivity {
+public class AdminXoaRapActivity extends AppCompatActivity {
     private Spinner deleteCinemaSpinner;
     private DatabaseHelper myDb;
 
@@ -28,7 +28,7 @@ public class AdminDeleteCinemasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_delete_cinemas);
+        setContentView(R.layout.activity_admin_xoa_rap);
 
         try {
             Field field = CursorWindow.class.getDeclaredField("sCursorWindowSize");
@@ -38,26 +38,26 @@ public class AdminDeleteCinemasActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //initilizez baza de date
+
         myDb = new DatabaseHelper(this);
 
-        //legatura dintre cod si interfata vizuala
+
         Button deleteCinemaButton = findViewById(R.id.delete_cinema_button);
         deleteCinemaSpinner = findViewById(R.id.delete_cinema_spinner);
 
-        //setarea listei spinner-ului cu cinemauri
+
         SetSpinnerList();
 
 
         deleteCinemaSpinner.setVisibility(View.VISIBLE);
 
-        //preluarea item-ului selectat
+        //Lấy rạp đã chọn
         deleteCinemaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long arg3)
             {
-                //punerea informatiei preluate intr o variabila globala
+
                 CinemaName = parent.getItemAtPosition(position).toString();
 
             }
@@ -68,7 +68,7 @@ public class AdminDeleteCinemasActivity extends AppCompatActivity {
             }
         });
 
-        //actionarea butonului delete
+
         deleteCinemaButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -83,10 +83,10 @@ public class AdminDeleteCinemasActivity extends AppCompatActivity {
 
     }
 
-    //functie pentru stergerea cinemaului
+
     private void ConfirmdeleteCinema()
     {
-        //accesare baza de date cu toate cinema-urile
+        //Lấy data từ DB
         Cursor res = null;
         try{
             res = myDb.getAllCinemas();
@@ -96,25 +96,24 @@ public class AdminDeleteCinemasActivity extends AppCompatActivity {
                 res.moveToPosition(i);
                 String name = String.valueOf(res.getString(1));
 
-                //verific daca cinema-ul selectat de spinner se regaseste in vaza de date
                 if(CinemaName.equals(name))
                 {
-                    //daca se respecta conditia il sterg din baza de date
+
                     Integer deletedRows = myDb.deleteCinema(res.getString(0));
                     if(deletedRows > 0) {
-                        Toast.makeText(AdminDeleteCinemasActivity.this, "Data Deleted", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(AdminDeleteCinemasActivity.this, AdminDeleteCinemasActivity.class);
+                        Toast.makeText(AdminXoaRapActivity.this, "Đã xóa dữ liệu", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(AdminXoaRapActivity.this, AdminXoaRapActivity.class);
                         startActivity(intent);
                         finish();
                     }
                     else
-                        Toast.makeText(AdminDeleteCinemasActivity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdminXoaRapActivity.this,"Không được xóa dữ liệu",Toast.LENGTH_LONG).show();
 
                 }
             }
         }catch (Exception e)
         {
-            Toast.makeText(AdminDeleteCinemasActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminXoaRapActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
         }
         finally
         {
@@ -127,24 +126,22 @@ public class AdminDeleteCinemasActivity extends AppCompatActivity {
 
     }
 
-    //setez lista cu cinema-uri
     private void SetSpinnerList()
     {
-        //accesez baza de date cu toate cinema-urile
+
         Cursor res = myDb.getAllCinemas();
-        //initializez lista
+
         ArrayList<String> arrayList1 = new ArrayList<>();
 
-        // fiecare cinema gasit in baza de date il trec in lista
         for(int i=0;i<res.getCount();i++)
         {
             res.moveToPosition(i);
             arrayList1.add(String.valueOf(res.getString(1)));
         }
-        //in caz ca lista este goala arat utilizatorului ca nu exista niciun cinema
+
         if(arrayList1.isEmpty())
         {
-            arrayList1.add("No cinemas in database");
+            arrayList1.add("Không có rạp nào");
         }
 
         res.close();

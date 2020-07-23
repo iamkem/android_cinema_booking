@@ -10,7 +10,7 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv"
         android:layout_width="match_parent"
-        android:layout_height="640dp"
+        android:layout_height="600dp"
         android:layout_marginTop="10dp"
         android:padding="10dp">
 
@@ -97,13 +97,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/available_cinemas"
-                    android:layout_width="280dp"
+                    android:layout_width="260dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="15dp"
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:textOn=""
                     android:textOff=""
-                    android:src="@drawable/favourite">
+                    android:src="@drawable/heart_no">
                 </ToggleButton>
 
             </LinearLayout>
@@ -153,7 +153,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/review_rv"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

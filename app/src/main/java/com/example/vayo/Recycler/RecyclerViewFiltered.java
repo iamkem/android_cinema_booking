@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vayo.Model.Movies;
 import com.example.vayo.R;
-import com.example.vayo.ShowingsDetailActivity;
+import com.example.vayo.ChiTietPhimActivity;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class RecyclerViewFiltered extends RecyclerView.Adapter<RecyclerViewFilte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, ShowingsDetailActivity.class);
+                Intent intent = new Intent(mContext, ChiTietPhimActivity.class);
 
                 // passing data to the book activity
                 intent.putExtra("Id",mData.get(position).getId());

@@ -21,7 +21,7 @@ import com.example.vayo.R;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class AdminEditCinemasActivity extends AppCompatActivity {
+public class AdminChinhSuaRapActivity extends AppCompatActivity {
 
     private String Cname,Manager,Address,Capacity;
     private Spinner editCinemaSpinner;
@@ -35,7 +35,7 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_edit_cinemas);
+        setContentView(R.layout.activity_admin_chinh_sua_rap);
 
         try {
             Field field = CursorWindow.class.getDeclaredField("sCursorWindowSize");
@@ -45,10 +45,10 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //initializez baza de date
+
         myDb = new DatabaseHelper(this);
 
-        //fac legatura dintre cod si baza de date
+
         editCinemaButton = findViewById(R.id.edit_cinema_button);
         editCinemaSpinner = findViewById(R.id.edit_cinema_spinner);
         InputCinemaName = findViewById(R.id.admin_edit_cinema_name);
@@ -56,7 +56,7 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
         InputCinemaAddress = findViewById(R.id.admin_edit_cinema_address);
         InputCinemaCapacity = findViewById(R.id.admin_edit_cinema_capacity);
 
-        //setez lista cu cinemauri
+
         SetSpinnerList();
 
         editCinemaSpinner.setVisibility(View.VISIBLE);
@@ -65,7 +65,7 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long arg3)
             {
-                //update la ecran la fiecare alegere de nume a cinema-ului
+                //cập nhật trên màn hình cho mỗi phim đã chọn
                 CinemaName = parent.getItemAtPosition(position).toString();
                 updateScreen(CinemaName);
 
@@ -77,7 +77,7 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
             }
         });
 
-        //buton pentru salvarea modificarilor
+        //Button lưu thay đổi
         editCinemaButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -92,7 +92,7 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
     }
 
 
-    //salvare modificari la apasarea butonului
+    //Lưu sau khi nhấn nút
     private void SaveChanges()
     {
         Cname = InputCinemaName.getText().toString();
@@ -100,22 +100,22 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
         Address = InputCinemaAddress.getText().toString();
         Capacity = InputCinemaCapacity.getText().toString();
 
-        //verific posibile greseli de
+        //Validate
         if (TextUtils.isEmpty(Cname))
         {
-            Toast.makeText(this, "Please write cinema name...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập tên rạp...", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Manager))
         {
-            Toast.makeText(this, "Please write cinema manager...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập tên người quản lý...", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Address))
         {
-            Toast.makeText(this, "Please write cinema address...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập địa chỉ...", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Capacity))
         {
-            Toast.makeText(this, "Please write cinema capacity...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập sức chứa của rạp...", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -124,32 +124,32 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
 
     }
 
-    //modific cinema-ul
+
     private void StoreCinema(String n, String m, String a, String c)
     {
-        //accesez toate cinemaurile
+
         Cursor res = null;
         try {
             res = myDb.getAllCinemas();
 
             for(int i=0;i<res.getCount();i++)
             {
-                //verific daca am gasit cinema ul selectat in baza de date
+
                 res.moveToPosition(i);
                 if(CinemaName.equals(String.valueOf(res.getString(1))))
                 {
                     try
                     {
-                        //incerc modificarea datelor
+
                         myDb.updateCinema(String.valueOf(res.getString(0)),n,m,a,c);
-                        Toast.makeText(AdminEditCinemasActivity.this, "Data Update", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(AdminEditCinemasActivity.this,AdminEditCinemasActivity.class);
+                        Toast.makeText(AdminChinhSuaRapActivity.this, "Data Update", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(AdminChinhSuaRapActivity.this, AdminChinhSuaRapActivity.class);
                         startActivity(intent);
                         finish();
                     }
                     catch (Exception e)
                     {
-                        Toast.makeText(AdminEditCinemasActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdminChinhSuaRapActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
 
                     }
 
@@ -158,7 +158,7 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            Toast.makeText(AdminEditCinemasActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminChinhSuaRapActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
         }
         finally
         {
@@ -171,7 +171,6 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
     }
 
 
-    //actualizare informatii pe ecran
     private void updateScreen(String name)
     {
         if(editCinemaSpinner.getFirstVisiblePosition() == 0)
@@ -201,13 +200,13 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
     }
 
 
-    //Setez lista cu cinemauri
+
     private void SetSpinnerList()
     {
         //preiau toate cinemaurile
         Cursor res = myDb.getAllCinemas();
         ArrayList<String> arrayList1 = new ArrayList<>();
-        arrayList1.add("Please choose a cinema");
+        arrayList1.add("Vui lòng chọn rạp");
 
         for(int i=0;i<res.getCount();i++)
         {
@@ -216,7 +215,7 @@ public class AdminEditCinemasActivity extends AppCompatActivity {
         }
         if(arrayList1.isEmpty())
         {
-            arrayList1.add("No cinema in database");
+            arrayList1.add("Không có rạp nào");
         }
 
         res.close();

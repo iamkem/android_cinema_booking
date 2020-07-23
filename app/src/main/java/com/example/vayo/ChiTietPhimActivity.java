@@ -36,7 +36,7 @@ import java.util.Objects;
 
 import io.paperdb.Paper;
 
-public class ShowingsDetailActivity extends AppCompatActivity {
+public class ChiTietPhimActivity extends AppCompatActivity {
 
     private TextView tvtitle, tvdescription, tvcategory, txtLength, txtPrice, txtRating;
     private DatabaseHelper myDb;
@@ -55,7 +55,7 @@ public class ShowingsDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_showings_detail);
+        setContentView(R.layout.activity_chi_tiet_phim);
 
         try {
             Field field = CursorWindow.class.getDeclaredField("sCursorWindowSize");
@@ -65,14 +65,12 @@ public class ShowingsDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        //initializez jurnal
         Paper.init(this);
 
-        //initializez BD
+
         myDb = new DatabaseHelper(this);
 
-        //fac legatura dintre cod si interfata vizuala
+
         tvtitle = findViewById(R.id.txttitle);
         tvdescription =  findViewById(R.id.txtDesc);
         tvcategory =  findViewById(R.id.txtCategory);
@@ -86,7 +84,7 @@ public class ShowingsDetailActivity extends AppCompatActivity {
 
 
 
-        //Primesc date despre film
+        //Lấy dữ liệu phim từ ID
         Intent intent = getIntent();
         MOVIE_ID = Objects.requireNonNull(intent.getExtras()).getString("Id");
         ReceiveMovieDetails();
@@ -98,7 +96,7 @@ public class ShowingsDetailActivity extends AppCompatActivity {
 
         UpdateScreen();
 
-        //pun lista in Recycler
+
         RecyclerViewReview myAdapter = new RecyclerViewReview(this, lstMovieReview);
         myrv.setLayoutManager(new GridLayoutManager(this,1));
         myrv.setAdapter(myAdapter);
@@ -107,42 +105,42 @@ public class ShowingsDetailActivity extends AppCompatActivity {
 
 
 
-        //setez lista cu cinemauri disponibile pentru filmul curent
+        //Set các rạp có sẵn cho phim
         SetSpinnerList();
 
-        //buton pentru efectuarea unei rezervari
+        //Nút order
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!String.valueOf(spinner.getSelectedItem()).equals("No cinema for this movie")) {
-                    Intent intent = new Intent(ShowingsDetailActivity.this, BookShowingActivity.class);
+                if (!String.valueOf(spinner.getSelectedItem()).equals("Không có rạp cho phim này")) {
+                    Intent intent = new Intent(ChiTietPhimActivity.this, LichChieuActivity.class);
                     intent.putExtra("MOVIE_ID", MOVIE_NAME);
                     intent.putExtra("CINEMA_ID", String.valueOf(spinner.getSelectedItem()));
                     startActivity(intent);
                 }
                 else if(!String.valueOf(spinner.getSelectedItem()).equals(""))
                 {
-                    Toast.makeText(ShowingsDetailActivity.this, "No cinema for this movie", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChiTietPhimActivity.this, "Không có rạp cho phim này", Toast.LENGTH_SHORT).show();
 
                 }else {
-                    Toast.makeText(ShowingsDetailActivity.this, "No cinema for this movie", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChiTietPhimActivity.this, "Không có rạp cho phim này", Toast.LENGTH_SHORT).show();
                 }
             }
 
         });
 
-        //Actionare button film favorit
+        //Thêm vào yêu thích
         FavouriteButton.setChecked(false);
-        FavouriteButton.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.star_no));
+        FavouriteButton.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.heart_no));
         FavouriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     AddToFavourite();
-                    FavouriteButton.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.star_yes));
+                    FavouriteButton.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.heart_yes));
                 }else {
                     DeleteFromFavourite();
-                    FavouriteButton.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.star_no));
+                    FavouriteButton.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.heart_no));
                 }
                 }
         });
@@ -172,15 +170,15 @@ public class ShowingsDetailActivity extends AppCompatActivity {
     }
 
 
-    //returneaza id ul user-ului
+    //Trả về ID user
     private String getUserId(String email) {
         String id = "";
-        //citesc toate datele din tabelul de users
+        //Lấy dữ liệu từ user table
         Cursor res = myDb.getAllData();
 
         for (int i = 0; i < res.getCount(); i++) {
             res.moveToPosition(i);
-            //verific daca email-ul corespunde cu vreun email din BD
+            //Kiểm tra xem email có tương ứng với bất kỳ email nào trong DB k
             if (email.equals(String.valueOf(res.getString(1))))
                 id = String.valueOf(res.getString(0));
 
@@ -190,36 +188,36 @@ public class ShowingsDetailActivity extends AppCompatActivity {
         return id;
     }
 
-    //stergere filmul din favoritele userului
+    //Xóa khỏi yêu thích
     private void DeleteFromFavourite() {
-        //citesc toate filmele favorite
+        //Lấy dl yêu thích DB
         Cursor res = myDb.getAllFavourite();
 
         for (int i = 0; i < res.getCount(); i++) {
             res.moveToPosition(i);
-            //verific daca acestea corespund
+            //Check nếu khớp
             if (USER_ID.equals(String.valueOf(res.getString(1))) && MOVIE_ID.equals(String.valueOf(res.getString(0)))) {
                 myDb.deleteFavourite(String.valueOf(res.getString(0)), String.valueOf(res.getString(1)));
-                Toast.makeText(getApplicationContext(), "Movie was deleted successfully to favourite!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Đã xóa khỏi yêu thích!", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
 
-    //adaug filmul la favoritele userului
+    //Thêm vào yêu thích
     private void AddToFavourite() {
-        //preiau user ul curent din jurnal
+
         String UserEmailKey = Paper.book().read(Prevalent.UserEmailKey);
         USER_ID = getUserId(UserEmailKey); //aflu id ul userului curent
 
 
             try {
-                //adaug filmul in BD
+                //Thêm vào DB
                 myDb.insertFavourite(
                         MOVIE_ID,
                         USER_ID
                 );
-                Toast.makeText(getApplicationContext(), "Movie was added successfully to favourite!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Đã thêm vào yêu thích!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -229,15 +227,15 @@ public class ShowingsDetailActivity extends AppCompatActivity {
     }
 
 
-    //setez lista cu showuri
+//Lấy ds rạp chiếu
     private void SetSpinnerList() {
-        //citesc din BD toate show-urile
+
         Cursor res = myDb.getAllShowings();
         ArrayList<String> arrayList1 = new ArrayList<>();
         for(int i=0;i<res.getCount();i++)
         {
             res.moveToPosition(i);
-            //verific daca am gasit id ul filmului in BD
+
             if(MOVIE_ID.equals(String.valueOf(res.getString(1))))
             {
                 arrayList1.add(getCinemaName(String.valueOf(res.getString(2))));
@@ -246,16 +244,16 @@ public class ShowingsDetailActivity extends AppCompatActivity {
 
         if(arrayList1.isEmpty())
         {
-            arrayList1.add("No cinema for this movie");
+            arrayList1.add("Không có rạp chiếu cho phim này");
         }
 
 
-        //pun in spinner lista cu show uri
+        //Thêm vào layout để hiển thị
         ArrayAdapter<String> adp = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrayList1);
         spinner.setAdapter(adp);
     }
 
-    //returneza numele cinemaului primind ca parametru id ul cinemaului
+    //Trả về tên rạp chiếu phim, nhận id rạp chiếu phim làm tham số
     private String getCinemaName(String id){
         String name = "";
         Cursor res = myDb.getAllCinemas();
@@ -263,7 +261,7 @@ public class ShowingsDetailActivity extends AppCompatActivity {
         for(int i=0;i<res.getCount();i++)
         {
             res.moveToPosition(i);
-            //verific daca id ul corespunde cu id ul cinemaurilor din baza de date din tabelul cinema
+            //Kiểm tra xem id có tương ứng với id rạp chiếu phim trong table cinema không
             if(id.equals(String.valueOf(res.getString(0))))
             {
                 name = String.valueOf(res.getString(1));
@@ -274,7 +272,7 @@ public class ShowingsDetailActivity extends AppCompatActivity {
         return name;
     }
 
-    //preiau informatiile despre filmul selectat
+    //Lấy dữ liệu phim
     @SuppressLint("SetTextI18n")
     private void ReceiveMovieDetails() {
         Cursor res = myDb.getAllMovies();
@@ -282,14 +280,13 @@ public class ShowingsDetailActivity extends AppCompatActivity {
 
         for (int i = 0; i < res.getCount(); i++) {
             res.moveToPosition(i);
-            //verific daca id ul filmului corespunde cu vreun id din tabelul de cinemauri
-            //in caz afirmativ preiau informatiile din BD
+
             if (MOVIE_ID.equals(String.valueOf(res.getString(0)))) {
                 MOVIE_NAME = String.valueOf(res.getString(1));
                 tvtitle.setText(String.valueOf(res.getString(1)));
                 tvcategory.setText(String.valueOf(res.getString(2)));
                 tvdescription.setText(String.valueOf(res.getString(3)));
-                txtPrice.setText("Price: " + res.getString(4) + " €");
+                txtPrice.setText("Giá vé: " + res.getString(4) + " VNĐ");
                 byte [] image = res.getBlob(6);
                 Bitmap bitmap = null;
                 try {
@@ -297,10 +294,10 @@ public class ShowingsDetailActivity extends AppCompatActivity {
                 }
                 catch (Exception e)
                 {
-                    Toast.makeText(ShowingsDetailActivity.this, String.valueOf(movieImage),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChiTietPhimActivity.this, String.valueOf(movieImage),Toast.LENGTH_SHORT).show();
                 }
                 movieImage.setImageBitmap(bitmap);
-                txtLength.setText("Length: " + res.getString(5) + " min");
+                txtLength.setText("Thời lượng: " + res.getString(5) + " phút");
 
 
             }
@@ -310,7 +307,7 @@ public class ShowingsDetailActivity extends AppCompatActivity {
         for(int i=0; i <res_review.getCount(); i++)
         {
             res_review.moveToPosition(i);
-            txtRating.setText("Rating: " + res_review.getString(0) + "/10");
+            txtRating.setText("Xếp hạng: " + res_review.getString(0) + "/10");
 
         }
 

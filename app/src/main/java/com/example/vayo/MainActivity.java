@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.vayo.Database.DatabaseHelper;
 import com.example.vayo.Prevalent.Prevalent;
 
 import io.paperdb.Paper;
@@ -20,11 +19,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initializare jurnal
+        //Khởi tạo đăng nhập
         Paper.init(this);
 
 
-        //stabilire legatura dintre cod si interfata
         Button registerButton = findViewById(R.id.main_join_now_btn);
         Button loginButton = findViewById(R.id.main_login_btn);
 
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, DangKyActivity.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, DangNhapActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //Daca exista date in juranl inseamna ca user ul ramane logat si poate intra direct in aplicatie fara a se loga din nou
+        //Nếu có dữ liệu, người dùng vẫn đăng nhập và có thể vào ứng dụng trực tiếp mà không cần đăng nhập lại.
 
         String UserEmailKey = Paper.book().read(Prevalent.UserEmailKey);
         String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (!TextUtils.isEmpty(UserEmailKey)  &&  !TextUtils.isEmpty(UserPasswordKey))
             {
-                Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                Intent intent = new Intent(MainActivity.this, TrangChuActivity.class);
                 startActivity(intent);
             }
         }

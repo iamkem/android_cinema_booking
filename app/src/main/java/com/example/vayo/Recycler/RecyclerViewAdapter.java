@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vayo.Model.Movies;
 import com.example.vayo.R;
-import com.example.vayo.ShowingsDetailActivity;
+import com.example.vayo.ChiTietPhimActivity;
 
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, ShowingsDetailActivity.class);
+                Intent intent = new Intent(mContext, ChiTietPhimActivity.class);
 
                 // passing data to the book activity
                 intent.putExtra("Id",mData.get(position).getId());

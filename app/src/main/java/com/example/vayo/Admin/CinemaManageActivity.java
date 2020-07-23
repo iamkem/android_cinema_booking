@@ -28,7 +28,7 @@ public class CinemaManageActivity extends AppCompatActivity {
         addCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
-            { Intent intent = new Intent(CinemaManageActivity.this, AdminNewCinemasActivity.class);
+            { Intent intent = new Intent(CinemaManageActivity.this, AdminThemRapActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -37,7 +37,7 @@ public class CinemaManageActivity extends AppCompatActivity {
         deleteCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
-            { Intent intent = new Intent(CinemaManageActivity.this, AdminDeleteCinemasActivity.class);
+            { Intent intent = new Intent(CinemaManageActivity.this, AdminXoaRapActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -46,7 +46,7 @@ public class CinemaManageActivity extends AppCompatActivity {
         editCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
-            { Intent intent = new Intent(CinemaManageActivity.this, AdminEditCinemasActivity.class);
+            { Intent intent = new Intent(CinemaManageActivity.this, AdminChinhSuaRapActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

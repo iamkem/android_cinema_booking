@@ -16,14 +16,14 @@ import com.example.vayo.Model.Booking;
 import com.example.vayo.Database.DatabaseHelper;
 import com.example.vayo.R;
 import com.example.vayo.Recycler.RecyclerViewCheck;
-import com.example.vayo.ViewShowingActivityActivity;
+import com.example.vayo.DangChieuActivity;
 import com.example.vayo.ViewUsersActivity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminCheckReservationsActivity extends AppCompatActivity {
+public class AdminKiemTraDonHangActivity extends AppCompatActivity {
 
     private DatabaseHelper myDb;
     private List<Booking> lstBook;
@@ -35,7 +35,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_check_reservations);
+        setContentView(R.layout.activity_admin_kiem_tra_don_hang);
 
         try {
             Field field = CursorWindow.class.getDeclaredField("sCursorWindowSize");
@@ -45,25 +45,25 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Initializare baza de date
+
         myDb = new DatabaseHelper(this);
 
-        //Corelarea cu interfata vizuala
+
         RecyclerView myrv =  findViewById(R.id.check_booking_rv);
         Button viewUsers = findViewById(R.id.view_user_button);
         Button viewS = findViewById(R.id.view_showing_without_booking);
 
         lstBook = new ArrayList<>();
 
-        //Actualizare lista
+
         UpdateScreen();
 
-        //Button pentru accesarea altei ferestre
+
         viewUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AdminCheckReservationsActivity.this, ViewUsersActivity.class);
+                Intent intent = new Intent(AdminKiemTraDonHangActivity.this, ViewUsersActivity.class);
                 startActivity(intent);
             }
         });
@@ -72,13 +72,13 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AdminCheckReservationsActivity.this, ViewShowingActivityActivity.class);
+                Intent intent = new Intent(AdminKiemTraDonHangActivity.this, DangChieuActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        //Punerea informatiilor pe ecran din lista creata anterior mai sus
+        //Show dữ liệu từ danh sách đã tạo ở trên
         RecyclerViewCheck myAdapter = new RecyclerViewCheck(this,lstBook);
         myrv.setLayoutManager(new GridLayoutManager(this,1));
         myrv.setAdapter(myAdapter);
@@ -88,7 +88,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
 
     private void UpdateScreen()
     {
-        //Se citesc toate rezervarile facute
+        //Tất cả đơn hàng được xem
         Cursor res = null;
         try{
             res = myDb.getAllBookings();
@@ -96,7 +96,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
 
             for(int i=0;i<res.getCount();i++)
             {
-                //Adaugarea de informatii in lista
+                //Thêm dữ liệu vào danh sách
                 res.moveToPosition(i);
                 Booking_Id = String.valueOf(res.getString(0));
                 UserID = String.valueOf(res.getString(1));
@@ -115,7 +115,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            Toast.makeText(AdminCheckReservationsActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminKiemTraDonHangActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
         }
         finally
         {
@@ -127,7 +127,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
 
     }
 
-    //functiie pentru intoarcerea username-ului primind ca paramentru id-ul user-ului
+
     private String getUserName(String id)
     {
         //Preluare informatii despre user
@@ -145,7 +145,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
     }
 
 
-    //functiie pentru intoarcerea cautarii sortate dupa film si cinema
+
     private void getMovieandCinemaId(String show_id)
     {
         Cursor res = null;
@@ -162,7 +162,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            Toast.makeText(AdminCheckReservationsActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminKiemTraDonHangActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
         }
         finally
         {
@@ -176,7 +176,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
     }
 
 
-    //functie pentru intoarcerea numelui filmului primind ca paramentru id ul filmului
+
     private String getMovieName(String movie_id)
     {
         Cursor res = myDb.getAllMovies();
@@ -194,7 +194,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
 
     }
 
-    //functie ce returneaza numele cinema ului primind id ul cinemaului
+
     private String getCinemaName(String cinema_id)
     {
         Cursor res = myDb.getAllCinemas();
@@ -212,7 +212,7 @@ public class AdminCheckReservationsActivity extends AppCompatActivity {
 
     }
 
-    //functie ce returneaza pretul filmului  primind id ul filmului
+
     private String getMoviePrice(String movie_id)
     {
         Cursor res = myDb.getAllMovies();

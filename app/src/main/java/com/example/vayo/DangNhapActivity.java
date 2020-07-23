@@ -20,7 +20,7 @@ import com.example.vayo.Prevalent.Prevalent;
 
 import io.paperdb.Paper;
 
-public class LoginActivity extends AppCompatActivity {
+public class DangNhapActivity extends AppCompatActivity {
     private DatabaseHelper myDb;
     private EditText InputEmail, InputPassword;
     private Button LoginButton;
@@ -33,14 +33,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //initializare BD
+        //Khởi tạo DB
         myDb = new DatabaseHelper(this);
 
-        //initializare jurnal
+        //Khởi tạo đăng nhập
         Paper.init(this);
 
 
-        //stabilire legatura dintre cod si interfata vizuala
         LoginButton = findViewById(R.id.login_btn);
         InputPassword =  findViewById(R.id.login_password_input);
         InputEmail = findViewById(R.id.login_email_input);
@@ -87,11 +86,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void LoginUser()
     {
-        //preluare date
+
         String email = InputEmail.getText().toString();
         String password = InputPassword.getText().toString();
 
-        //verific campurile goale
+        //Validate
         if (TextUtils.isEmpty(email))
         {
             Toast.makeText(this, "Vui lòng nhập email...", Toast.LENGTH_SHORT).show();
@@ -108,12 +107,12 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.show();
 
 
-            //scriu datele in jurnal
+
             Paper.book().write(Prevalent.UserEmailKey, email);
             Paper.book().write(Prevalent.UserPasswordKey, password);
 
 
-            //in functie de stare user ului (Admin/User normal) si de destinatia dorita execut:
+            //Nếu tài khoản là Admin/User thì:
             if (parentDbName.equals("Admins"))
             {
                AllowAccessToAdmin(email,password);
@@ -128,22 +127,22 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //accesez backend-ul aplicatiei
+    //Check data DB
     private void AllowAccessToAdmin(final String email, final String password)
     {
         int ok = 0;
-        //citesc toate datele despre useri
+        //Đọc dữ liệu ĐB
         Cursor res = myDb.getAllData();
         String adminCheck = "yes";
         loadingBar.dismiss();
 
-        //in caz ca n am gasit nimic
+        //Nếu ko tìm thấy gì:
         if(res.getCount() == 0)
-            Toast.makeText(LoginActivity.this,"Chưa có tài khoản trong DB", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DangNhapActivity.this,"Chưa có tài khoản trong DB", Toast.LENGTH_SHORT).show();
 
         for(int i=0;i<res.getCount();i++)
         {
-            //citesc datele din tabel
+            //Đọc dữ liệu từ table
             res.moveToPosition(i);
             String user = String.valueOf(res.getString(1));
             String pass = String.valueOf(res.getString(2));
@@ -151,60 +150,60 @@ public class LoginActivity extends AppCompatActivity {
             if(email.equals(user) && password.equals(pass) && adminCheck.equals(admin))
             {
                 ok = 1;
-                Toast.makeText(LoginActivity.this,"Welcome " + res.getString(1), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DangNhapActivity.this,"Welcome " + res.getString(1), Toast.LENGTH_SHORT).show();
 
             }
         }
 
-        //daca totul este in regula
+        //Nếu tìm thấy dữ liệu
         if(ok == 1)
         {
-            Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class);
+            Intent intent = new Intent(DangNhapActivity.this, AdminMainActivity.class);
             startActivity(intent);
         }
         else
         {
-            Toast.makeText(LoginActivity.this,"Email hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DangNhapActivity.this,"Email hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
 
         }
 
     }
 
-    //Accesez aplicatia
+    //Cho phép vào ứng dụng
     private void AllowAccessToAccount(final String email, final String password)
     {
         int ok = 0;
-        //accesez toti userii
+        //Allow all user
         Cursor res = myDb.getAllData();
         loadingBar.dismiss();
 
-        //verific daca exista useri in BD
+        //Kiểm tra nếu có user trong DB
         if(res.getCount() == 0)
-            Toast.makeText(LoginActivity.this,"Chưa có tài khoản trong DB", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DangNhapActivity.this,"Chưa có tài khoản trong DB", Toast.LENGTH_SHORT).show();
 
       for(int i=0;i<res.getCount();i++)
       {
           res.moveToPosition(i);
           String user = String.valueOf(res.getString(1));
           String pass = String.valueOf(res.getString(2));
-          //verific daca user ul si parola corespund vreunei inregistrari din BD
+          //So sánh user & pass nếu khớp trong DB
           if(email.equals(user) && password.equals(pass))
           {
               ok = 1;
-              Toast.makeText(LoginActivity.this,"Welcome " + res.getString(1), Toast.LENGTH_SHORT).show();
+              Toast.makeText(DangNhapActivity.this,"Chào mừng " + res.getString(1), Toast.LENGTH_SHORT).show();
 
           }
       }
 
-      //daca totul este in regula
+      //Check nếu tất cả ổn thì:
       if(ok == 1)
       {
-          Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+          Intent intent = new Intent(DangNhapActivity.this, TrangChuActivity.class);
           startActivity(intent);
       }
       else
       {
-          Toast.makeText(LoginActivity.this,"Email hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(DangNhapActivity.this,"Email hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
 
       }
 

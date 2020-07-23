@@ -1,7 +1,6 @@
 package com.example.vayo;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -24,14 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 
 import io.paperdb.Paper;
 
-public class BookShowingActivity extends AppCompatActivity {
+public class LichChieuActivity extends AppCompatActivity {
     private String movieName, cinemaName;
     private String BookForDate, SeatCount;
 
@@ -45,12 +43,12 @@ public class BookShowingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_showing);
+        setContentView(R.layout.activity_lich_chieu);
         Paper.init(this);
-        //Initializare BD
+
         myDb = new DatabaseHelper(this);
 
-        //legatura dintre cod si interfata vizuala
+
         MovieName = findViewById(R.id.movie_name);
         CinemaName = findViewById(R.id.cinema_name);
         spinner = findViewById(R.id.booking_for_date_spinner);
@@ -77,7 +75,7 @@ public class BookShowingActivity extends AppCompatActivity {
         });
     }
 
-    //functie ce returneaza id ul user ului in functie de nume
+
     private String getUserId(String name)
     {
         String id = "";
@@ -96,7 +94,7 @@ public class BookShowingActivity extends AppCompatActivity {
 
     private void BookShowing()
     {
-        //stabilire date rezervare
+        //Thêm ngày & giờ
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String currentDate = sdf.format(new Date());
 
@@ -120,8 +118,8 @@ public class BookShowingActivity extends AppCompatActivity {
                     ShowingId,BookForDate,currentDate,
                     currentTime,SeatCount,"no"
             );
-            Toast.makeText(getApplicationContext(), "Booking was made successfully!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(BookShowingActivity.this,MainActivity.class);
+            Toast.makeText(getApplicationContext(), "Thêm lịch chiếu thành công!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LichChieuActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
         }
@@ -147,7 +145,7 @@ public class BookShowingActivity extends AppCompatActivity {
     }
 
 
-    //returnare id film
+    //Trả về ID phim
     public String getMovieId(String name) {
         String n = "";
         Cursor res = myDb.getAllMovies();
@@ -161,7 +159,7 @@ public class BookShowingActivity extends AppCompatActivity {
         return n;
     }
 
-    //returnare id cinema
+    //Trả về ID rạp chiếu
     public String getCinemaId(String name) {
         String n = "";
         Cursor res = myDb.getAllCinemas();
@@ -176,7 +174,7 @@ public class BookShowingActivity extends AppCompatActivity {
     }
 
 
-    //returnare id show in functie de cinema si film
+    //Trả về ID lịch chiếu tùy thuộc vào ID phim và ID rạp
     private void getShowingId()
     {
         String movieId = getMovieId(movieName);
@@ -209,7 +207,7 @@ public class BookShowingActivity extends AppCompatActivity {
         spinner.setAdapter(adp);
     }
 
-    //convertirea datelor in string uri pentru scrierea lor in lista
+    //Chuyển dữ liệu ngày & giờ thành một chuỗi
     public static String dateToString(Date date) {
         String convertedDate = "";
 
@@ -238,7 +236,7 @@ public class BookShowingActivity extends AppCompatActivity {
 
     }
 
-    //returnare toate datele dintre 2 date date
+
     private static ArrayList<Date> getDates(String dateString1, String dateString2)
     {
         ArrayList<Date> dates = new ArrayList<Date>();
