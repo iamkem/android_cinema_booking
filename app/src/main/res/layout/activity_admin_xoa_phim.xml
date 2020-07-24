@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,22 +8,19 @@
     tools:context=".Admin.AdminXoaPhimActivity"
     android:background="@drawable/admin_background">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/delete_cinema_spinner"
+        android:id="@+id/delete_movie_spinner"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="100dp"
-        android:background="@drawable/input_design_admin" />
+        android:background="@drawable/input_design_admin"
+        android:layout_below="@+id/admin_add_product_name" />
 
     <Button
-        android:id="@+id/delete_cinema_button"
+        android:id="@+id/delete_movie_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="45dp"
@@ -32,14 +29,12 @@
         android:paddingBottom="10dp"
         android:layout_marginRight="45dp"
         android:background="@color/colorPrimary"
-        android:hint="Xóa rạp"
+        android:hint="Xóa phim"
         android:padding="17dp"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         />
 
-    </RelativeLayout>
 
-
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>

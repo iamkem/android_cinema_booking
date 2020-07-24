@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.vayo">
+    package="com.example.cinemabooking">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_transparent"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_transparent"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DangChieuActivity"></activity>
-        <activity android:name=".ViewUsersActivity" />
-        <activity android:name=".LichChieuActivity" />
-        <activity android:name=".ChiTietPhimActivity" />
-        <activity android:name=".Admin.AdminEditShowingsActivity" />
-        <activity android:name=".Admin.AdminDeleteShowingsActivity" />
-        <activity android:name=".Admin.AdminNewShowingsActivity" />
-        <activity android:name=".Admin.ShowingMoviesManagerActivity" />
-        <activity android:name=".Admin.AdminChinhSuaRapActivity" />
-        <activity android:name=".Admin.AdminXoaRapActivity" />
-        <activity android:name=".Admin.AdminThemRapActivity" />
-        <activity android:name=".Admin.CinemaManageActivity" />
-        <activity android:name=".Admin.MovieManageActivity" />
-        <activity android:name=".Admin.AdminKiemTraDonHangActivity" />
-        <activity android:name=".Admin.AdminDeleteMovieActivity" />
-        <activity android:name=".Admin.AdminEditMovieActivity" />
-        <activity android:name=".Admin.AdminNewMoviesActivity" />
-        <activity android:name=".Admin.AdminMainActivity" />
-        <activity android:name=".TrangChuActivity" />
-        <activity android:name=".DangNhapActivity" />
-        <activity android:name=".DangKyActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.cinemabooking.MainActivity"></activity>
+        <activity android:name="com.example.cinemabooking.DangChieuActivity" />
+        <activity android:name="com.example.cinemabooking.ViewUsersActivity" />
+        <activity android:name="com.example.cinemabooking.LichChieuActivity" />
+        <activity android:name="com.example.cinemabooking.ChiTietPhimActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminChinhSuaLichChieuActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminXoaLichChieuActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminThemLichChieuActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.QuanLyLichChieuActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminChinhSuaRapActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminXoaRapActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminThemRapActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.QuanLyRapActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.QuanLyPhimActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminKiemTraDonHangActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminXoaPhimActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminChinhSuaPhimActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminThemPhimActivity" />
+        <activity android:name="com.example.cinemabooking.Admin.AdminMainActivity" />
+        <activity android:name="com.example.cinemabooking.TrangChuActivity" />
+        <activity android:name="com.example.cinemabooking.DangNhapActivity" />
+        <activity android:name="com.example.cinemabooking.DangKyActivity" />
+        <activity android:name="com.example.cinemabooking.ManHinhChaoActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
